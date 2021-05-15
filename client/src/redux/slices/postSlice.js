@@ -9,23 +9,31 @@ const postSlice = createSlice({
   },
   reducers: {
     getAllPostsRequest(state) {
-      state.loading = true
+      // eslint-disable-next-line
+      ;(state.loading = true), (state.posts = []), (state.error = '')
     },
     getAllPostsSuccess(state, action) {
-      ;(state.loading = false), (state.posts = action.payload)
+      // eslint-disable-next-line
+      ;(state.loading = false),
+        (state.posts = action.payload),
+        (state.error = '')
     },
 
     getAllPostsError(state, action) {
-      state.error = action.payload
+      // eslint-disable-next-line
+      ;(state.error = action.payload), (state.loading = false)
     },
     createPostRequest(state) {
-      state.loading = true
+      // eslint-disable-next-line
+      ;(state.loading = true), (state.posts = []), (state.error = '')
     },
-    createPostSuccess(state, action) {
-      state.posts = action.payload
+    createPostSuccess(state) {
+      // eslint-disable-next-line
+      ;(state.loading = false), (state.error = '')
     },
     createPostError(state, action) {
-      state.error = action.payload
+      // eslint-disable-next-line
+      ;(state.error = action.payload), (state.loading = false)
     }
   }
 })

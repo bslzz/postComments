@@ -16,9 +16,9 @@ const CreatePostsComponent = () => {
     setPost({ ...post, [e.target.name]: e.target.value })
   }
 
-  const submitPost = async (e) => {
+  const submitPost = (e) => {
     e.preventDefault()
-    await dispatch(createPostRequest(post))
+    dispatch(createPostRequest(post))
   }
 
   console.log('post', post)
