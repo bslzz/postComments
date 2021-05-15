@@ -2,12 +2,20 @@ const { Posts } = require('../models')
 
 module.exports = {
   createPosts: async (req, res) => {
-    const post = req.body
-    const result = await Posts.create(post)
-    res.json({ result })
+    try {
+      const post = req.body
+      const result = await Posts.create(post)
+      res.json(result)
+    } catch (error) {
+      res.status(500).json({ msg: `${error}` })
+    }
   },
   getAllPosts: async (req, res) => {
-    const getAllPosts = await Posts.findAll()
-    res.json({ getAllPosts })
+    try {
+      const getAllPosts = await Posts.findAll()
+      res.json(getAllPosts)
+    } catch (error) {
+      res.status(500).json({ msg: `${error}` })
+    }
   }
 }
