@@ -1,0 +1,14 @@
+
+// CREATE A NEW POST
+POST http://localhost:5000/posts
+Content-Type: application/json
+
+{
+    "title":"hello",
+    "postText":"this is for testing",
+    "username":"bis"
+}
+
+// GET ALL POSTS
+###
+GET http://localhost:5000/posts
