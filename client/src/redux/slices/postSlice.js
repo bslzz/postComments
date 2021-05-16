@@ -37,15 +37,15 @@ const postSlice = createSlice({
       return {
         ...state,
         loading: true,
-        posts: [],
         error: null
       }
     },
     addPostsSuccess(state, action) {
+      const postData = action.payload
       return {
         ...state,
         loading: false,
-        posts: action.payload,
+        ...postData,
         error: null
       }
     },

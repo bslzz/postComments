@@ -1,4 +1,4 @@
-import { call, put, takeEvery, takeLeading } from '@redux-saga/core/effects'
+import { call, put, takeEvery } from '@redux-saga/core/effects'
 import {
   getAllPostsRequest,
   getAllPostsSuccess,
@@ -8,6 +8,7 @@ import {
   addPostsFailed
 } from '../redux/slices/postSlice'
 import axios from 'axios'
+import history from '../history'
 
 function* addNewPostsSaga(action) {
   try {
@@ -17,6 +18,9 @@ function* addNewPostsSaga(action) {
       action.payload
     )
     yield put(addPostsSuccess(response.data))
+    if (response.status == 200) {
+      history.push('/')
+    }
   } catch (error) {
     if (error.response.data.msg) {
       yield put(addPostsFailed(error.response.data.msg))
@@ -36,7 +40,7 @@ function* getAllPostsSaga() {
 }
 
 export function* watchAddNewPostsSaga() {
-  yield takeLeading(addPostsRequest.type, addNewPostsSaga)
+  yield takeEvery(addPostsRequest.type, addNewPostsSaga)
 }
 
 export function* watchGetAllPostsSaga() {

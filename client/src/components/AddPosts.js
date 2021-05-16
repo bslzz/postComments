@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addPostsRequest } from '../redux/slices/postSlice'
 
-const CreatePostsComponent = () => {
+const AddPostsComponent = () => {
   const [post, setPost] = useState({
     title: '',
     postText: '',
@@ -20,8 +20,6 @@ const CreatePostsComponent = () => {
     e.preventDefault()
     dispatch(addPostsRequest(post))
   }
-
-  console.log('post', post)
   return (
     <div>
       <form onSubmit={submitPost}>
@@ -60,4 +58,4 @@ const CreatePostsComponent = () => {
   )
 }
 
-export default CreatePostsComponent
+export default AddPostsComponent
