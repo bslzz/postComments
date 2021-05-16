@@ -19,5 +19,15 @@ module.exports = {
     } catch (error) {
       res.status(500).json({ msg: `${error}` })
     }
+  },
+  getPostById: async (req, res) => {
+    try {
+      const id = req.params.id
+      // find by primary key
+      const postById = await Posts.findByPk(id)
+      res.json(postById)
+    } catch (error) {
+      res.status(500).json({ msg: `${error}` })
+    }
   }
 }

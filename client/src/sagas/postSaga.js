@@ -1,14 +1,22 @@
 import { call, put, takeEvery } from '@redux-saga/core/effects'
-import {
-  getAllPostsRequest,
-  getAllPostsSuccess,
-  getAllPostsFailed,
-  addPostsRequest,
-  addPostsSuccess,
-  addPostsFailed
-} from '../redux/slices/postSlice'
+
 import axios from 'axios'
 import history from '../history'
+import {
+  addPostsFailed,
+  addPostsRequest,
+  addPostsSuccess
+} from '../redux/slices/addPostSlice'
+import {
+  getAllPostsFailed,
+  getAllPostsRequest,
+  getAllPostsSuccess
+} from '../redux/slices/allPostsSlice'
+import {
+  getPostByIdFailed,
+  getPostByIdRequest,
+  getPostByIdSuccess
+} from '../redux/slices/getPostSlice'
 
 function* addNewPostsSaga(action) {
   try {
@@ -39,10 +47,24 @@ function* getAllPostsSaga() {
   }
 }
 
+function* getPostByIdSaga(action) {
+  const id = action.payload
+  try {
+    const response = yield call(axios.get, `http://localhost:5000/posts/${id}`)
+    yield put(getPostByIdSuccess(response.data))
+  } catch (error) {
+    yield put(getPostByIdFailed(error.message))
+  }
+}
+
 export function* watchAddNewPostsSaga() {
   yield takeEvery(addPostsRequest.type, addNewPostsSaga)
 }
 
 export function* watchGetAllPostsSaga() {
   yield takeEvery(getAllPostsRequest.type, getAllPostsSaga)
+}
+
+export function* watchGetPostByIdSaga() {
+  yield takeEvery(getPostByIdRequest.type, getPostByIdSaga)
 }
