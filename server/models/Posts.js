@@ -14,5 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   })
 
+  Posts.associate = (models) => {
+    Posts.hasMany(models.Comments, {
+      // if post gets deleted, comments get deleted too
+      onDelete: 'cascade'
+    })
+  }
+
   return Posts
 }

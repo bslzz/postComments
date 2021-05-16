@@ -17,3 +17,18 @@ GET http://localhost:5000/posts
 // GET POST BY ID
 ###
 GET http://localhost:5000/posts/55
+
+
+// GET COMMENTS BY POST ID
+###
+GET http://localhost:5000/comments/76
+
+// POST COMMENTS
+###
+POST http://localhost:5000/comments
+Content-Type: application/json
+
+{
+    "commentBody": "this is a comment",
+    "PostId": 76
+}
