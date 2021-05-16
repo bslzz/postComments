@@ -4,7 +4,7 @@ POST http://localhost:5000/posts
 Content-Type: application/json
 
 {
-    "title":"",
+    "title":"d",
     "postText":"d",
     "username":"d"
 }

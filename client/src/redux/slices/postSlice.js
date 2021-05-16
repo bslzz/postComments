@@ -5,35 +5,57 @@ const postSlice = createSlice({
   initialState: {
     posts: [],
     loading: false,
-    error: ''
+    error: null
   },
   reducers: {
     getAllPostsRequest(state) {
-      // eslint-disable-next-line
-      ;(state.loading = true), (state.posts = []), (state.error = '')
+      return {
+        ...state,
+        loading: true,
+        posts: [],
+        error: null
+      }
     },
     getAllPostsSuccess(state, action) {
-      // eslint-disable-next-line
-      ;(state.loading = false),
-        (state.posts = action.payload),
-        (state.error = '')
+      return {
+        ...state,
+        loading: false,
+        posts: action.payload,
+        error: null
+      }
     },
 
-    getAllPostsError(state, action) {
-      // eslint-disable-next-line
-      ;(state.error = action.payload), (state.loading = false)
+    getAllPostsFailed(state, action) {
+      return {
+        ...state,
+        loading: false,
+        posts: [],
+        error: action.payload
+      }
     },
-    createPostRequest(state) {
-      // eslint-disable-next-line
-      ;(state.loading = true), (state.posts = []), (state.error = '')
+    addPostsRequest(state) {
+      return {
+        ...state,
+        loading: true,
+        posts: [],
+        error: null
+      }
     },
-    createPostSuccess(state) {
-      // eslint-disable-next-line
-      ;(state.loading = false), (state.error = '')
+    addPostsSuccess(state, action) {
+      return {
+        ...state,
+        loading: false,
+        posts: action.payload,
+        error: null
+      }
     },
-    createPostError(state, action) {
-      // eslint-disable-next-line
-      ;(state.error = action.payload), (state.loading = false)
+    addPostsFailed(state, action) {
+      return {
+        ...state,
+        loading: false,
+        posts: [],
+        error: action.payload
+      }
     }
   }
 })
@@ -41,9 +63,9 @@ const postSlice = createSlice({
 export const {
   getAllPostsRequest,
   getAllPostsSuccess,
-  getAllPostsError,
-  createPostRequest,
-  createPostSuccess,
-  createPostError
+  getAllPostsFailed,
+  addPostsRequest,
+  addPostsSuccess,
+  addPostsFailed
 } = postSlice.actions
 export default postSlice.reducer

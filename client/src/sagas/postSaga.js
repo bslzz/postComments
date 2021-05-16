@@ -1,35 +1,42 @@
-import { call, put, takeEvery } from '@redux-saga/core/effects'
+import { call, put, takeEvery, takeLeading } from '@redux-saga/core/effects'
 import {
   getAllPostsRequest,
   getAllPostsSuccess,
-  getAllPostsError,
-  createPostRequest,
-  createPostSuccess,
-  createPostError
+  getAllPostsFailed,
+  addPostsRequest,
+  addPostsSuccess,
+  addPostsFailed
 } from '../redux/slices/postSlice'
 import axios from 'axios'
-import { fetchAllPosts } from '../utils/api'
 
-function* createNewPostsSaga(action) {
+function* addNewPostsSaga(action) {
   try {
-    yield call(axios.post, 'http://localhost:5000/posts', action.payload)
-    yield put(createPostSuccess())
+    const response = yield call(
+      axios.post,
+      'http://localhost:5000/posts',
+      action.payload
+    )
+    yield put(addPostsSuccess(response.data))
   } catch (error) {
-    yield put(createPostError(error.response.data.msg))
+    if (error.response.data.msg) {
+      yield put(addPostsFailed(error.response.data.msg))
+    } else {
+      yield put(addPostsFailed(error.message))
+    }
   }
 }
 
 function* getAllPostsSaga() {
   try {
-    const response = yield call(fetchAllPosts)
-    yield put(getAllPostsSuccess(response))
+    const response = yield call(axios.get, 'http://localhost:5000/posts')
+    yield put(getAllPostsSuccess(response.data))
   } catch (error) {
-    yield put(getAllPostsError(error.response.data.msg))
+    yield put(getAllPostsFailed(error.message))
   }
 }
 
-export function* watchcreateNewPostsSaga() {
-  yield takeEvery(createPostRequest.type, createNewPostsSaga)
+export function* watchAddNewPostsSaga() {
+  yield takeLeading(addPostsRequest.type, addNewPostsSaga)
 }
 
 export function* watchGetAllPostsSaga() {

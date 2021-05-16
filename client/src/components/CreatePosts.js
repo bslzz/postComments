@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { createPostRequest } from '../redux/slices/postSlice'
+import { addPostsRequest } from '../redux/slices/postSlice'
 
 const CreatePostsComponent = () => {
   const [post, setPost] = useState({
@@ -18,7 +18,7 @@ const CreatePostsComponent = () => {
 
   const submitPost = (e) => {
     e.preventDefault()
-    dispatch(createPostRequest(post))
+    dispatch(addPostsRequest(post))
   }
 
   console.log('post', post)
