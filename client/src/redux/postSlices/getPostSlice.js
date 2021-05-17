@@ -9,28 +9,15 @@ const getPostSlice = createSlice({
   },
   reducers: {
     getPostByIdRequest(state) {
-      return {
-        ...state,
-        loading: true,
-        post: [],
-        error: null
-      }
+      state.loading = true
     },
     getPostByIdSuccess(state, action) {
-      return {
-        ...state,
-        loading: false,
-        post: action.payload,
-        error: null
-      }
+      state.loading = false
+      state.post = action.payload
     },
     getPostByIdFailed(state, action) {
-      return {
-        ...state,
-        loading: false,
-        post: [],
-        error: action.payload
-      }
+      state.loading = false
+      state.error = action.payload
     }
   }
 })

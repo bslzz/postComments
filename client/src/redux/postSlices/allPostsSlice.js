@@ -9,29 +9,16 @@ const getAllPostsSlice = createSlice({
   },
   reducers: {
     getAllPostsRequest(state) {
-      return {
-        ...state,
-        loading: true,
-        allPosts: [],
-        error: null
-      }
+      state.loading = true
     },
     getAllPostsSuccess(state, action) {
-      return {
-        ...state,
-        loading: false,
-        allPosts: action.payload,
-        error: null
-      }
+      state.loading = false
+      state.allPosts = action.payload
     },
 
     getAllPostsFailed(state, action) {
-      return {
-        ...state,
-        loading: false,
-        allPosts: [],
-        error: action.payload
-      }
+      state.loading = false
+      state.error = action.payload
     }
   }
 })

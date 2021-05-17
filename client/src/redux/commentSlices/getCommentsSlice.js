@@ -9,29 +9,18 @@ const getCommentsSlice = createSlice({
   },
   reducers: {
     getCommentsRequest(state) {
-      return {
-        ...state,
-        loading: true,
-        comments: [],
-        error: null
-      }
+      state.loading = true
     },
     getCommentsSuccess(state, action) {
       console.log('getCommentsSuccess', action)
-      return {
-        ...state,
-        loading: false,
-        comments: action.payload,
-        error: null
-      }
+      state.loading = false
+      state.comments = action.payload
+      state.error = null
     },
+
     getCommentsFailed(state, action) {
-      return {
-        ...state,
-        loading: false,
-        comments: [],
-        error: action.payload
-      }
+      state.loading = false
+      state.error = action.payload
     }
   }
 })

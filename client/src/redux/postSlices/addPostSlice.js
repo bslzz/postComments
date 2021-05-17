@@ -9,29 +9,15 @@ const addPostSlice = createSlice({
   },
   reducers: {
     addPostsRequest(state) {
-      return {
-        ...state,
-        addedPosts: [],
-        loading: true,
-        error: null
-      }
+      state.loading = true
     },
     addPostsSuccess(state, action) {
-      const postData = action.payload
-      return {
-        ...state,
-        loading: false,
-        addedPosts: postData,
-        error: null
-      }
+      state.loading = false
+      state.addedPosts = action.payload
     },
     addPostsFailed(state, action) {
-      return {
-        ...state,
-        loading: false,
-        addedPosts: [],
-        error: action.payload
-      }
+      state.loading = true
+      state.error = action.payload
     }
   }
 })

@@ -9,29 +9,16 @@ const addCommentsSlice = createSlice({
   },
   reducers: {
     addCommentsRequest(state) {
-      return {
-        ...state,
-        loading: true,
-        addedComments: [],
-        error: null
-      }
+      state.loading = true
     },
     addCommentsSuccess(state, action) {
-      const commentsData = action.payload
-      return {
-        ...state,
-        loading: false,
-        addedComments: commentsData,
-        error: null
-      }
+      state.loading = false
+      state.addedComments = action.payload
+      state.error = null
     },
     addCommentsFailed(state, action) {
-      return {
-        ...state,
-        loading: false,
-        addedComments: [],
-        error: action.payload
-      }
+      state.loading = false
+      state.error = action.payload
     }
   }
 })
