@@ -9,6 +9,8 @@ import getPostReducer from './redux/postSlices/getPostSlice'
 import addPostReducer from './redux/postSlices/addPostSlice'
 import getCommentReducer from './redux/commentSlices/getCommentsSlice'
 import addCommentsReducer from './redux/commentSlices/addCommentsSlice'
+import registerReducer from './redux/authSlices/registerSlice'
+import loginReducer from './redux/authSlices/loginSlices'
 import rootSaga from './sagas'
 
 const sagaMiddleware = createSagaMiddleware()
@@ -18,7 +20,9 @@ const reducer = combineReducers({
   getPost: getPostReducer,
   addPost: addPostReducer,
   getComments: getCommentReducer,
-  addComments: addCommentsReducer
+  addComments: addCommentsReducer,
+  registerUser: registerReducer,
+  loginUser: loginReducer
 })
 
 const store = configureStore({

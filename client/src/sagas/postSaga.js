@@ -26,9 +26,8 @@ function* addNewPostsSaga(action) {
       action.payload
     )
     yield put(addPostsSuccess(response.data))
-    if (response.status == 200) {
-      history.push('/')
-    }
+
+    history.push('/')
   } catch (error) {
     if (error.response.data.msg) {
       yield put(addPostsFailed(error.response.data.msg))
