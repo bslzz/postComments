@@ -12,6 +12,7 @@ app.use(express.json())
 //routes
 app.use('/posts', require('./routes/Posts'))
 app.use('/comments', require('./routes/Comments'))
+app.use('/users', require('./routes/Users'))
 
 db.sequelize.sync().then(() => {
   app.listen(PORT, () => console.log(`Server running on PORT ${PORT}`))

@@ -32,3 +32,23 @@ Content-Type: application/json
     "commentBody": "this is a comment",
     "PostId": 76
 }
+
+// REGISTER USERS
+###
+POST http://localhost:5000/users/register
+Content-Type: application/json
+
+{
+    "username": "bis",
+    "password": "1234"
+}
+
+// LOGIN USERS
+###
+POST http://localhost:5000/users/login
+Content-Type: application/json
+
+{
+    "username": "bis",
+    "password": "1234"
+}
