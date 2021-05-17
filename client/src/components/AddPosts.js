@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { addPostsRequest } from '../redux/slices/addPostSlice'
+import { addPostsRequest } from '../redux/postSlices/addPostSlice'
 
 const AddPostsComponent = () => {
   const [post, setPost] = useState({

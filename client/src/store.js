@@ -4,9 +4,11 @@ import {
   getDefaultMiddleware
 } from '@reduxjs/toolkit'
 import createSagaMiddleware from 'redux-saga'
-import allPostsReducer from './redux/slices/allPostsSlice'
-import getPostReducer from './redux/slices/getPostSlice'
-import addPostReducer from './redux/slices/addPostSlice'
+import allPostsReducer from './redux/postSlices/allPostsSlice'
+import getPostReducer from './redux/postSlices/getPostSlice'
+import addPostReducer from './redux/postSlices/addPostSlice'
+import getCommentReducer from './redux/commentSlices/getCommentsSlice'
+import addCommentsReducer from './redux/commentSlices/addCommentsSlice'
 import rootSaga from './sagas'
 
 const sagaMiddleware = createSagaMiddleware()
@@ -14,7 +16,9 @@ const sagaMiddleware = createSagaMiddleware()
 const reducer = combineReducers({
   allPosts: allPostsReducer,
   getPost: getPostReducer,
-  addPost: addPostReducer
+  addPost: addPostReducer,
+  getComments: getCommentReducer,
+  addComments: addCommentsReducer
 })
 
 const store = configureStore({

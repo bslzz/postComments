@@ -6,17 +6,17 @@ import {
   addPostsFailed,
   addPostsRequest,
   addPostsSuccess
-} from '../redux/slices/addPostSlice'
+} from '../redux/postSlices/addPostSlice'
 import {
   getAllPostsFailed,
   getAllPostsRequest,
   getAllPostsSuccess
-} from '../redux/slices/allPostsSlice'
+} from '../redux/postSlices/allPostsSlice'
 import {
   getPostByIdFailed,
   getPostByIdRequest,
   getPostByIdSuccess
-} from '../redux/slices/getPostSlice'
+} from '../redux/postSlices/getPostSlice'
 
 function* addNewPostsSaga(action) {
   try {

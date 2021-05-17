@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { getAllPostsRequest } from '../redux/slices/allPostsSlice'
+import { getAllPostsRequest } from '../redux/postSlices/allPostsSlice'
 
 const DashboardComponent = () => {
   const history = useHistory()
@@ -12,7 +12,6 @@ const DashboardComponent = () => {
   }, [dispatch])
 
   const posts = useSelector((state) => state.allPosts.allPosts)
-  console.log(posts)
   return (
     <div>
       <h1>Posts</h1>

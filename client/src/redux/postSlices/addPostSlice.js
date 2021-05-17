@@ -11,6 +11,7 @@ const addPostSlice = createSlice({
     addPostsRequest(state) {
       return {
         ...state,
+        addedPosts: [],
         loading: true,
         error: null
       }
@@ -20,7 +21,7 @@ const addPostSlice = createSlice({
       return {
         ...state,
         loading: false,
-        ...postData,
+        addedPosts: postData,
         error: null
       }
     },
