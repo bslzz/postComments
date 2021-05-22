@@ -22,7 +22,11 @@ function* getCommentsSaga(action) {
     )
     yield put(getCommentsSuccess(response.data))
   } catch (error) {
-    yield put(getCommentsFailed(error.message))
+    if (error.response.data.errMsg) {
+      yield put(getCommentsFailed(error.response.data.errMsg))
+    } else {
+      yield put(getCommentsFailed(error.message))
+    }
   }
 }
 
@@ -31,11 +35,20 @@ function* addCommentsSaga(action) {
     const response = yield call(
       axios.post,
       'http://localhost:5000/comments',
-      action.payload
+      action.payload,
+      {
+        headers: {
+          accessToken: sessionStorage.getItem('accessToken')
+        }
+      }
     )
     yield put(addCommentsSuccess(response.data))
   } catch (error) {
-    yield put(addCommentsFailed(error.message))
+    if (error.response.data.errMsg) {
+      yield put(addCommentsFailed(error.response.data.errMsg))
+    } else {
+      yield put(addCommentsFailed(error.message))
+    }
   }
 }
 

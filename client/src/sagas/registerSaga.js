@@ -22,7 +22,11 @@ function* registerUsersSaga(action) {
     if (error.response.data.errMsg) {
       yield put(registerUserFailed(error.response.data.errMsg))
     } else {
-      yield put(registerUserFailed(error.message))
+      if (error.response.data.errMsg) {
+        yield put(registerUserFailed(error.response.data.errMsg))
+      } else {
+        yield put(registerUserFailed(error.message))
+      }
     }
   }
 }

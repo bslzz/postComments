@@ -42,7 +42,11 @@ function* getAllPostsSaga() {
     const response = yield call(axios.get, 'http://localhost:5000/posts')
     yield put(getAllPostsSuccess(response.data))
   } catch (error) {
-    yield put(getAllPostsFailed(error.message))
+    if (error.response.data.errMsg) {
+      yield put(getAllPostsFailed(error.response.data.errMsg))
+    } else {
+      yield put(getAllPostsFailed(error.message))
+    }
   }
 }
 
@@ -52,7 +56,11 @@ function* getPostByIdSaga(action) {
     const response = yield call(axios.get, `http://localhost:5000/posts/${id}`)
     yield put(getPostByIdSuccess(response.data))
   } catch (error) {
-    yield put(getPostByIdFailed(error.message))
+    if (error.response.data.errMsg) {
+      yield put(getPostByIdFailed(error.response.data.errMsg))
+    } else {
+      yield put(getPostByIdFailed(error.message))
+    }
   }
 }
 

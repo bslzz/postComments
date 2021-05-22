@@ -15,7 +15,7 @@ function* loginUsersSaga(action) {
       'http://localhost:5000/users/login',
       action.payload
     )
-    if (respose.data) sessionStorage.setItem('acessToken', response.data)
+    response.data && sessionStorage.setItem('accessToken', response.data)
     yield put(loginUserSuccess(response.data))
     history.push('/')
   } catch (error) {
