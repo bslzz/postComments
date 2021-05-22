@@ -42,5 +42,15 @@ module.exports = {
     } catch (error) {
       res.status(500).json({ errMsg: `${error}` })
     }
+  },
+
+  validateUser: async (req, res) => {
+    try {
+      const user = await req.user
+      res.json(user)
+      console.log('user', user)
+    } catch (error) {
+      res.status(500).json({ errMsg: `${error}` })
+    }
   }
 }

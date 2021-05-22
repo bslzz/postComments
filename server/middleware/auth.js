@@ -6,6 +6,7 @@ const validateToken = (req, res, next) => {
     return res.status(400).json({ errMsg: 'User not logged in' })
   try {
     const validToken = jwt.verify(accessToken, process.env.JWT_SECRET)
+    req.user = validToken
     if (validToken) return next()
   } catch (error) {
     res.status(500).json({ errMsg: `${error}` })

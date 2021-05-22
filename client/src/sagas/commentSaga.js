@@ -20,6 +20,7 @@ function* getCommentsSaga(action) {
       axios.get,
       `http://localhost:5000/comments/${id}`
     )
+
     yield put(getCommentsSuccess(response.data))
   } catch (error) {
     if (error.response.data.errMsg) {
@@ -38,7 +39,7 @@ function* addCommentsSaga(action) {
       action.payload,
       {
         headers: {
-          accessToken: sessionStorage.getItem('accessToken')
+          accessToken: localStorage.getItem('accessToken')
         }
       }
     )

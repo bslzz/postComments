@@ -72,7 +72,7 @@ const PostComponent = () => {
                 padding: '10px'
               }}
             >
-              {comment.commentBody}
+              <b> {comment.username} :</b> {comment.commentBody}
             </div>
           </div>
         )

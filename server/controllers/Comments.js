@@ -14,6 +14,8 @@ module.exports = {
   postComment: async (req, res) => {
     try {
       const comment = req.body
+      const username = req.user.username
+      comment.username = username
       const result = await Comments.create(comment)
       res.json(result)
     } catch (error) {
