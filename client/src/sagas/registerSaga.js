@@ -19,8 +19,8 @@ function* registerUsersSaga(action) {
 
     history.push('/login')
   } catch (error) {
-    if (error.response.data.msg) {
-      yield put(registerUserFailed(error.response.data.msg))
+    if (error.response.data.errMsg) {
+      yield put(registerUserFailed(error.response.data.errMsg))
     } else {
       yield put(registerUserFailed(error.message))
     }

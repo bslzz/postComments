@@ -29,8 +29,8 @@ function* addNewPostsSaga(action) {
 
     history.push('/')
   } catch (error) {
-    if (error.response.data.msg) {
-      yield put(addPostsFailed(error.response.data.msg))
+    if (error.response.data.errMsg) {
+      yield put(addPostsFailed(error.response.data.errMsg))
     } else {
       yield put(addPostsFailed(error.message))
     }
