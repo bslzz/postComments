@@ -20,10 +20,27 @@ const loginSlice = createSlice({
     loginUserFailed(state, action) {
       state.loading = false
       state.error = action.payload
+    },
+    validateUsersRequest(state) {
+      state.loading = true
+    },
+    validateUsersSuccess(state, action) {
+      console.log(action)
+      state.loading = false
+    },
+    validateUsersFailed(state, action) {
+      state.loading = false
+      state.error = action.payload
     }
   }
 })
 
-export const { loginUserRequest, loginUserSuccess, loginUserFailed } =
-  loginSlice.actions
+export const {
+  loginUserRequest,
+  loginUserSuccess,
+  loginUserFailed,
+  validateUsersRequest,
+  validateUsersSuccess,
+  validateUsersFailed
+} = loginSlice.actions
 export default loginSlice.reducer

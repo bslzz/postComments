@@ -46,9 +46,8 @@ module.exports = {
 
   validateUser: async (req, res) => {
     try {
-      const user = await req.user
-      res.json(user)
-      console.log('user', user)
+      await res.json(req.user)
+      console.log(req.user)
     } catch (error) {
       res.status(500).json({ errMsg: `${error}` })
     }

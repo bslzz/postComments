@@ -1,6 +1,5 @@
 import { call, put, takeEvery } from '@redux-saga/core/effects'
-
-import axios from 'axios'
+import { login } from '../api/users'
 import history from '../history'
 import {
   loginUserFailed,
@@ -10,11 +9,7 @@ import {
 
 function* loginUsersSaga(action) {
   try {
-    const response = yield call(
-      axios.post,
-      'http://localhost:5000/users/login',
-      action.payload
-    )
+    const response = yield call(login, action.payload)
     response.data && localStorage.setItem('accessToken', response.data)
     yield put(loginUserSuccess(response.data))
     history.push('/')

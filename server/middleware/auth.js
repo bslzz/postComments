@@ -5,9 +5,13 @@ const validateToken = (req, res, next) => {
   if (!accessToken)
     return res.status(400).json({ errMsg: 'User not logged in' })
   try {
-    const validToken = jwt.verify(accessToken, process.env.JWT_SECRET)
-    req.user = validToken
-    if (validToken) return next()
+    jwt.verify(accessToken, process.env.JWT_SECRET, (err, user) => {
+      if (err)
+        return res.status(401).json({ errMsg: 'Please login to post comments' })
+
+      req.user = user
+      next()
+    })
   } catch (error) {
     res.status(500).json({ errMsg: `${error}` })
   }

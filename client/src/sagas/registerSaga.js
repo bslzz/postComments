@@ -1,6 +1,5 @@
 import { call, put, takeEvery } from '@redux-saga/core/effects'
-
-import axios from 'axios'
+import { register } from '../api/users'
 import history from '../history'
 import {
   registerUserFailed,
@@ -10,13 +9,8 @@ import {
 
 function* registerUsersSaga(action) {
   try {
-    const response = yield call(
-      axios.post,
-      'http://localhost:5000/users/register',
-      action.payload
-    )
+    const response = yield call(register, action.payload)
     yield put(registerUserSuccess(response.data))
-
     history.push('/login')
   } catch (error) {
     if (error.response.data.errMsg) {
