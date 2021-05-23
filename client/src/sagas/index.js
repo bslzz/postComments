@@ -1,6 +1,10 @@
 import { all } from 'redux-saga/effects'
-import { watchAddCommentsSaga, watchGetCommentsSaga } from './commentSaga'
-import { watchloginUsersSaga } from './loginSaga'
+import {
+  watchAddCommentsSaga,
+  watchDeleteCommentsSaga,
+  watchGetCommentsSaga
+} from './commentSaga'
+import { watchloginUsersSaga, watchlogOutSaga } from './loginSaga'
 import {
   watchAddNewPostsSaga,
   watchGetAllPostsSaga,
@@ -16,6 +20,8 @@ export default function* rootSaga() {
     watchGetCommentsSaga(),
     watchAddCommentsSaga(),
     watchregisterUsersSaga(),
-    watchloginUsersSaga()
+    watchloginUsersSaga(),
+    watchlogOutSaga(),
+    watchDeleteCommentsSaga()
   ])
 }

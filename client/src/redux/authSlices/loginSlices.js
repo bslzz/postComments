@@ -3,9 +3,11 @@ import { createSlice } from '@reduxjs/toolkit'
 const loginSlice = createSlice({
   name: 'loginUsers',
   initialState: {
-    token: [],
+    token: '',
     loading: false,
-    error: null
+    error: null,
+    auth: false,
+    user: null
   },
   reducers: {
     loginUserRequest(state) {
@@ -21,14 +23,31 @@ const loginSlice = createSlice({
       state.loading = false
       state.error = action.payload
     },
-    validateUsersRequest(state) {
-      state.loading = true
-    },
+
     validateUsersSuccess(state, action) {
-      console.log(action)
       state.loading = false
+      const username = action.payload
+
+      username !== ' ' || username !== 'undefined'
+        ? (state.auth = true)
+        : (state.auth = false)
+      state.user = username
     },
     validateUsersFailed(state, action) {
+      console.log(action.payload)
+      state.loading = false
+      state.error = action.payload
+    },
+    logOutRequest(state) {
+      state.loading = true
+    },
+    logOutSuccess(state) {
+      state.loading = false
+      state.token = []
+      state.error = null
+      state.auth = false
+    },
+    logOutFailed(state, action) {
       state.loading = false
       state.error = action.payload
     }
@@ -41,6 +60,9 @@ export const {
   loginUserFailed,
   validateUsersRequest,
   validateUsersSuccess,
-  validateUsersFailed
+  validateUsersFailed,
+  logOutRequest,
+  logOutSuccess,
+  logOutFailed
 } = loginSlice.actions
 export default loginSlice.reducer

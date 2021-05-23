@@ -21,5 +21,20 @@ module.exports = {
     } catch (error) {
       res.status(500).json({ errMsg: `${error}` })
     }
+  },
+
+  deleteComment: async (req, res) => {
+    try {
+      const commentId = req.params.commentId
+
+      const result = await Comments.destroy({
+        where: {
+          id: commentId
+        }
+      })
+      res.json(result)
+    } catch (error) {
+      res.status(500).json({ errMsg: `${error}` })
+    }
   }
 }

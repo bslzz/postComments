@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { logOutRequest } from '../redux/authSlices/loginSlices'
 import { isAuthorized } from '../utils/auth'
+import { useDispatch } from 'react-redux'
 
 const Navbar = () => {
   const [authState, setAuthState] = useState(false)
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (isAuthorized()) {
@@ -24,7 +28,9 @@ const Navbar = () => {
           <Link to='/login'>Login</Link>
         </>
       ) : (
-        <Link to='/logout'>Logout</Link>
+        <Link onClick={() => dispatch(logOutRequest())} to='/logout'>
+          Logout
+        </Link>
       )}
     </div>
   )

@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getPostByIdRequest } from '../redux/postSlices/getPostSlice'
-import { getCommentsRequest } from '../redux/commentSlices/getCommentsSlice'
+import {
+  deleteCommentsRequest,
+  getCommentsRequest
+} from '../redux/commentSlices/getCommentsSlice'
 import { addCommentsRequest } from '../redux/commentSlices/addCommentsSlice'
 
 const PostComponent = () => {
@@ -11,6 +14,8 @@ const PostComponent = () => {
 
   const post = useSelector((state) => state.getPost.post)
   const comments = useSelector((state) => state.getComments.comments)
+  const user = useSelector((state) => state.loginUser.user)
+  console.log(user)
 
   const [comment, setNewComment] = useState('')
 
@@ -73,6 +78,15 @@ const PostComponent = () => {
               }}
             >
               <b> {comment.username} :</b> {comment.commentBody}
+              {user == comment.username ? (
+                <button
+                  onClick={() => dispatch(deleteCommentsRequest(comment.id))}
+                >
+                  X
+                </button>
+              ) : (
+                ''
+              )}
             </div>
           </div>
         )

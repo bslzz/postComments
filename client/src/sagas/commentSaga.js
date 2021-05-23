@@ -1,12 +1,14 @@
 import { call, put, takeEvery } from '@redux-saga/core/effects'
-
-import axios from 'axios'
+import { addComments, deleteComments, getComments } from '../api/comments'
 import {
   addCommentsFailed,
   addCommentsRequest,
   addCommentsSuccess
 } from '../redux/commentSlices/addCommentsSlice'
 import {
+  deleteCommentsFailed,
+  deleteCommentsRequest,
+  deleteCommentsSuccess,
   getCommentsFailed,
   getCommentsRequest,
   getCommentsSuccess
@@ -16,10 +18,7 @@ function* getCommentsSaga(action) {
   const id = action.payload
 
   try {
-    const response = yield call(
-      axios.get,
-      `http://localhost:5000/comments/${id}`
-    )
+    const response = yield call(getComments, id)
 
     yield put(getCommentsSuccess(response.data))
   } catch (error) {
@@ -34,14 +33,9 @@ function* getCommentsSaga(action) {
 function* addCommentsSaga(action) {
   try {
     const response = yield call(
-      axios.post,
-      'http://localhost:5000/comments',
+      addComments,
       action.payload,
-      {
-        headers: {
-          accessToken: localStorage.getItem('accessToken')
-        }
-      }
+      localStorage.getItem('accessToken')
     )
     yield put(addCommentsSuccess(response.data))
   } catch (error) {
@@ -52,10 +46,26 @@ function* addCommentsSaga(action) {
     }
   }
 }
-
+function* deleteCommentsSaga(action) {
+  console.log(action)
+  try {
+    const response = yield call(
+      deleteComments,
+      action.payload,
+      localStorage.getItem('accessToken')
+    )
+    console.log(response)
+    yield put(deleteCommentsSuccess(action.payload))
+  } catch (error) {
+    yield put(deleteCommentsFailed(error.message))
+  }
+}
 export function* watchGetCommentsSaga() {
   yield takeEvery(getCommentsRequest.type, getCommentsSaga)
 }
 export function* watchAddCommentsSaga() {
   yield takeEvery(addCommentsRequest.type, addCommentsSaga)
+}
+export function* watchDeleteCommentsSaga() {
+  yield takeEvery(deleteCommentsRequest.type, deleteCommentsSaga)
 }

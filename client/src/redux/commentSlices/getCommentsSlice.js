@@ -21,10 +21,32 @@ const getCommentsSlice = createSlice({
     getCommentsFailed(state, action) {
       state.loading = false
       state.error = action.payload
+    },
+    deleteCommentsRequest(state) {
+      state.loading = true
+    },
+    deleteCommentsSuccess(state, action) {
+      const id = action.payload
+      state.loading = false
+      state.error = null
+      state.comments = state.comments.filter((value) => {
+        return value.id != id
+      })
+    },
+
+    deleteCommentsFailed(state, action) {
+      state.loading = false
+      state.error = action.payload
     }
   }
 })
 
-export const { getCommentsRequest, getCommentsSuccess, getCommentsFailed } =
-  getCommentsSlice.actions
+export const {
+  getCommentsRequest,
+  getCommentsSuccess,
+  getCommentsFailed,
+  deleteCommentsRequest,
+  deleteCommentsSuccess,
+  deleteCommentsFailed
+} = getCommentsSlice.actions
 export default getCommentsSlice.reducer

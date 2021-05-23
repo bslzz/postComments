@@ -21,6 +21,6 @@ export const register = (user) =>
 export const validateUsers = (token) =>
   userInstance.request({
     method: 'GET',
-    data: token,
+    headers: { accesstoken: token },
     url: '/auth'
   })
